@@ -1,9 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ReactStars from "react-stars";
+import { deletemovie } from "../redux/Action";
+import Editmovie from "./Editmovie";
 function Movielist() {
+    const dispatch=useDispatch()
   const movies = useSelector((state) => state.movies);
   console.log(movies);
   return (
@@ -22,7 +25,8 @@ function Movielist() {
                 color2={"#ffd700"}
               />
             </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
+            <Button variant="danger" onClick={()=>dispatch(deletemovie(e.id))}>delete</Button>
+            <Editmovie movie={e}/>
           </Card.Body>
         </Card>
       ))}
